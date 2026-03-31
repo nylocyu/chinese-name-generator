@@ -1,12 +1,13 @@
 'use strict';
 
-const form          = document.getElementById('checker-form');
-const input         = document.getElementById('checker-input');
-const submitBtn     = document.getElementById('checker-submit');
-const loadingEl     = document.getElementById('checker-loading');
-const errorEl       = document.getElementById('checker-error');
-const resultEl      = document.getElementById('checker-result');
-const checkAgainBtn = document.getElementById('btn-check-again');
+const form            = document.getElementById('checker-form');
+const input           = document.getElementById('checker-input');
+const submitBtn       = document.getElementById('checker-submit');
+const loadingEl       = document.getElementById('checker-loading');
+const errorEl         = document.getElementById('checker-error');
+const resultEl        = document.getElementById('checker-result');
+const resultWrapper   = document.getElementById('checker-result-wrapper');
+const checkAgainBtn   = document.getElementById('btn-check-again');
 
 // Region toggle
 let selectedRegion = 'mainland';
@@ -51,7 +52,7 @@ function setLoading(on) {
     loadingEl.classList.add('visible');
     submitBtn.disabled = true;
     input.disabled     = true;
-    resultEl.classList.add('checker-result-hidden');
+    resultWrapper.style.display = 'none';
     resultEl.classList.remove('checker-result');
   } else {
     loadingEl.classList.remove('visible');
@@ -187,7 +188,7 @@ function displayResult(data) {
   }
 
   // Reveal result
-  resultEl.classList.remove('checker-result-hidden');
+  resultWrapper.style.display = 'block';
   resultEl.classList.add('checker-result');
 
   // Scroll to result
@@ -289,7 +290,7 @@ form.addEventListener('submit', e => {
 });
 
 checkAgainBtn.addEventListener('click', () => {
-  resultEl.classList.add('checker-result-hidden');
+  resultWrapper.style.display = 'none';
   resultEl.classList.remove('checker-result');
   input.value = '';
   input.focus();

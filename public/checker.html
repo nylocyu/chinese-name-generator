@@ -192,55 +192,10 @@
       <p>Enter any Chinese name and we'll analyse its authenticity, meaning, cultural fit, and how natural it sounds to native speakers.</p>
     </section>
 
-    <div class="checker-wrapper">
+    <!-- Result -->
+    <div class="checker-wrapper" id="checker-result-wrapper" style="display:none">
       <div class="checker-card">
-
-        <div class="region-toggle" id="checker-region-toggle">
-          <button type="button" class="region-btn active" data-value="mainland">
-            <span class="region-char">中</span> Mainland China
-          </button>
-          <button type="button" class="region-btn" data-value="taiwan">
-            <span class="region-char">臺</span> Taiwan
-          </button>
-        </div>
-
-        <form class="checker-form" id="checker-form" autocomplete="off">
-          <label class="checker-label" for="checker-input">Enter a Chinese name</label>
-          <div class="checker-input-row">
-            <input
-              type="text"
-              class="checker-input"
-              id="checker-input"
-              placeholder="e.g. 王明 or 李晨曦"
-              maxlength="10"
-              autocomplete="off"
-            >
-            <button type="submit" class="btn btn-accent" id="checker-submit">
-              Analyse
-              <svg style="width:16px;height:16px;flex-shrink:0" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M4 10h12M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
-          </div>
-          <div style="margin-top:10px; font-size:12px; color:var(--text-light); font-weight:300;">
-            Tip: Enter the name in Chinese characters — e.g. 王明, 林晨曦, 陈若云
-          </div>
-        </form>
-
-        <div class="checker-loading" id="checker-loading">
-          <div class="loading-char" style="animation: breathe 2s ease-in-out infinite;">査</div>
-          <div>
-            <div class="loading-text" style="font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--text-mid);">
-              Analysing<span class="loading-dots"></span>
-            </div>
-            <div style="font-size:11px; color:var(--text-light); margin-top:4px; text-align:center;">Results can take up to 30 seconds</div>
-          </div>
-        </div>
-
-        <div class="error-box" id="checker-error" role="alert"></div>
-
-        <!-- Result -->
-        <div id="checker-result" class="checker-result-hidden">
+        <div id="checker-result">
 
           <div class="score-ring-wrap">
             <div class="score-ring">
@@ -339,6 +294,56 @@
           </div>
 
         </div><!-- /checker-result -->
+      </div><!-- /checker-card -->
+    </div><!-- /result-wrapper -->
+
+    <!-- Form -->
+    <div class="checker-wrapper">
+      <div class="checker-card">
+
+        <div class="region-toggle" id="checker-region-toggle">
+          <button type="button" class="region-btn active" data-value="mainland">
+            <span class="region-char">中</span> Mainland China
+          </button>
+          <button type="button" class="region-btn" data-value="taiwan">
+            <span class="region-char">臺</span> Taiwan
+          </button>
+        </div>
+
+        <form class="checker-form" id="checker-form" autocomplete="off">
+          <label class="checker-label" for="checker-input">Enter a Chinese name</label>
+          <div class="checker-input-row">
+            <input
+              type="text"
+              class="checker-input"
+              id="checker-input"
+              placeholder="e.g. 王明 or 李晨曦"
+              maxlength="10"
+              autocomplete="off"
+            >
+            <button type="submit" class="btn btn-accent" id="checker-submit">
+              Analyse
+              <svg style="width:16px;height:16px;flex-shrink:0" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M4 10h12M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+          <div style="margin-top:10px; font-size:12px; color:var(--text-light); font-weight:300;">
+            Tip: Enter the name in Chinese characters — e.g. 王明, 林晨曦, 陈若云
+          </div>
+        </form>
+
+        <div class="checker-loading" id="checker-loading">
+          <div class="loading-char" style="animation: breathe 2s ease-in-out infinite;">査</div>
+          <div>
+            <div class="loading-text" style="font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--text-mid);">
+              Analysing<span class="loading-dots"></span>
+            </div>
+            <div style="font-size:11px; color:var(--text-light); margin-top:4px; text-align:center;">Results can take up to 30 seconds</div>
+          </div>
+        </div>
+
+        <div class="error-box" id="checker-error" role="alert"></div>
 
       </div><!-- /checker-card -->
     </div><!-- /checker-wrapper -->
