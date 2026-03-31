@@ -3,258 +3,1212 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chinese Name Generator — Find Your Chinese Name</title>
-  <meta name="description" content="Discover your authentic Chinese name through a thoughtful, personalised process guided by AI.">
-  <!-- Favicon -->
+  <title>Sinosphere — AI Tools for Chinese Language &amp; Culture</title>
+  <meta name="description" content="Free AI-powered tools for Chinese names and culture. Generate an authentic Chinese name tailored to you, or verify if an existing Chinese name is culturally appropriate.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://sinosphere.ai/">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Chinese Name Generator">
-  <meta property="og:title" content="Chinese Name Generator — Find Your Chinese Name">
-  <meta property="og:description" content="Discover your authentic Chinese name through a thoughtful, personalised process guided by AI.">
+  <meta property="og:site_name" content="Sinosphere">
+  <meta property="og:title" content="Sinosphere — AI Tools for Chinese Language &amp; Culture">
+  <meta property="og:description" content="Free AI-powered tools for Chinese names and culture. Generate an authentic Chinese name or verify if yours is culturally appropriate.">
   <meta property="og:image" content="/og-image.png">
+  <meta property="og:url" content="https://sinosphere.ai/">
+
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Chinese Name Generator — Find Your Chinese Name">
-  <meta name="twitter:description" content="Discover your authentic Chinese name through a thoughtful, personalised process guided by AI.">
+  <meta name="twitter:title" content="Sinosphere — AI Tools for Chinese Language &amp; Culture">
+  <meta name="twitter:description" content="Free AI-powered tools for Chinese names and culture. Generate an authentic Chinese name or verify yours.">
   <meta name="twitter:image" content="/og-image.png">
-  <link rel="stylesheet" href="/css/styles.css">
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Sinosphere",
+    "url": "https://sinosphere.ai",
+    "description": "AI-powered tools for Chinese language and culture",
+    "offers": [
+      {
+        "@type": "Service",
+        "name": "Chinese Name Generator",
+        "description": "Generate an authentic Chinese name based on your identity and preferences",
+        "url": "https://sinosphere.ai/chinese-name-generator"
+      },
+      {
+        "@type": "Service",
+        "name": "Chinese Name Checker",
+        "description": "Verify if a Chinese name is authentic and culturally appropriate",
+        "url": "https://sinosphere.ai/checker"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:           #07061A;
+      --bg-card:      #0D0B27;
+      --bg-surface:   #131030;
+      --text:         #EAE8F5;
+      --text-mid:     #9C98C8;
+      --text-light:   #6A668A;
+      --purple:       #7F77DD;
+      --purple-dim:   rgba(127, 119, 221, 0.12);
+      --purple-glow:  rgba(127, 119, 221, 0.24);
+      --teal:         #5DCAA5;
+      --teal-dim:     rgba(93, 202, 165, 0.1);
+      --mint:         #9FE1CB;
+      --gold:         #C4924A;
+      --gold-warm:    #E8B56A;
+      --border:       rgba(127, 119, 221, 0.14);
+      --border-str:   rgba(127, 119, 221, 0.28);
+      --transition:   0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Large background characters */
+    body::before {
+      content: '名';
+      position: fixed;
+      top: -8%;
+      right: -3%;
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(320px, 42vw, 640px);
+      color: var(--purple);
+      opacity: 0.025;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+      line-height: 1;
+    }
+
+    body::after {
+      content: '字';
+      position: fixed;
+      bottom: -12%;
+      left: -4%;
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(300px, 38vw, 600px);
+      color: var(--teal);
+      opacity: 0.02;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+      line-height: 1;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 68px;
+      padding: 0 clamp(24px, 5vw, 72px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(7, 6, 26, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .nav-logo-mark {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+    }
+
+    .nav-wordmark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-link {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      text-decoration: none;
+      padding: 8px 16px;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      transition: var(--transition);
+      transition-property: color, border-color, background-color;
+    }
+
+    .nav-link:hover {
+      color: var(--text);
+      border-color: var(--border);
+      background: var(--bg-surface);
+    }
+
+    .nav-link-tool {
+      color: var(--purple);
+      border-color: var(--purple-dim);
+      background: var(--purple-dim);
+    }
+
+    .nav-link-tool:hover {
+      color: #A09AEC;
+      border-color: rgba(127, 119, 221, 0.35);
+      background: rgba(127, 119, 221, 0.18);
+    }
+
+    /* ── MAIN ── */
+    main {
+      position: relative;
+      z-index: 1;
+      padding-top: 68px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: calc(100vh - 68px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: clamp(60px, 10vw, 120px) clamp(24px, 5vw, 64px) clamp(80px, 10vw, 120px);
+      position: relative;
+      background:
+        radial-gradient(ellipse 80% 55% at 50% 0%, rgba(60, 52, 137, 0.25) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 40% at 15% 70%, rgba(93, 202, 165, 0.05) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 40% at 85% 70%, rgba(127, 119, 221, 0.05) 0%, transparent 55%);
+    }
+
+    /* Subtle star-field */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(1.5px 1.5px at 8% 14%, rgba(255,255,255,0.28) 0%, transparent 100%),
+        radial-gradient(1px 1px at 22% 7%, rgba(255,255,255,0.18) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 40% 20%, rgba(255,255,255,0.22) 0%, transparent 100%),
+        radial-gradient(1px 1px at 62% 9%, rgba(255,255,255,0.15) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 81% 17%, rgba(255,255,255,0.24) 0%, transparent 100%),
+        radial-gradient(1px 1px at 93% 32%, rgba(255,255,255,0.12) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 5% 44%, rgba(255,255,255,0.18) 0%, transparent 100%),
+        radial-gradient(1px 1px at 71% 53%, rgba(255,255,255,0.14) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 34% 72%, rgba(255,255,255,0.1) 0%, transparent 100%),
+        radial-gradient(1px 1px at 87% 78%, rgba(255,255,255,0.14) 0%, transparent 100%),
+        radial-gradient(1px 1px at 16% 87%, rgba(255,255,255,0.1) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 54% 91%, rgba(255,255,255,0.12) 0%, transparent 100%),
+        radial-gradient(1px 1px at 48% 35%, rgba(127,119,221,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 77% 28%, rgba(93,202,165,0.3) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero > * { position: relative; z-index: 1; }
+
+    .hero-logo {
+      width: clamp(140px, 22vw, 196px);
+      height: clamp(140px, 22vw, 196px);
+      margin-bottom: clamp(32px, 5vw, 48px);
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 20px;
+    }
+
+    .hero-eyebrow::before,
+    .hero-eyebrow::after {
+      content: '';
+      display: inline-block;
+      width: 36px;
+      height: 1px;
+      background: var(--teal);
+      opacity: 0.4;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(56px, 10vw, 118px);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: 0.07em;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+
+    .hero-sub {
+      font-size: clamp(15px, 2vw, 18px);
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto 44px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid transparent;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--purple);
+      color: #FFFFFF;
+      border-color: var(--purple);
+    }
+
+    .btn-primary:hover {
+      background: #9590E8;
+      border-color: #9590E8;
+      box-shadow: 0 0 32px 6px var(--purple-glow);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-mid);
+      border-color: var(--border-str);
+    }
+
+    .btn-outline:hover {
+      color: var(--text);
+      border-color: var(--purple);
+      background: var(--purple-dim);
+      transform: translateY(-1px);
+    }
+
+    .btn-teal {
+      background: var(--teal);
+      color: #07061A;
+      border-color: var(--teal);
+      font-weight: 500;
+    }
+
+    .btn-teal:hover {
+      background: #7DD8B8;
+      border-color: #7DD8B8;
+      box-shadow: 0 0 28px 6px rgba(93, 202, 165, 0.28);
+      transform: translateY(-2px);
+    }
+
+    .btn-arrow {
+      width: 16px;
+      height: 16px;
+      transition: transform var(--transition);
+      flex-shrink: 0;
+    }
+
+    .btn:hover .btn-arrow {
+      transform: translateX(4px);
+    }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-light);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 44px;
+      background: linear-gradient(to bottom, rgba(127,119,221,0.6), transparent);
+      animation: scrollPulse 2.4s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.25; transform: scaleY(1); }
+      50%       { opacity: 0.8;  transform: scaleY(1.1); }
+    }
+
+    /* ── TOOLS SECTION ── */
+    .section-tools {
+      padding: clamp(80px, 12vw, 120px) clamp(24px, 5vw, 72px);
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 18px;
+    }
+
+    .section-eyebrow::before,
+    .section-eyebrow::after {
+      content: '';
+      display: inline-block;
+      width: 40px;
+      height: 1px;
+      background: var(--border-str);
+    }
+
+    .section-heading {
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 5vw, 54px);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: clamp(48px, 7vw, 72px);
+      letter-spacing: -0.01em;
+    }
+
+    .section-heading em {
+      font-style: italic;
+      color: var(--purple);
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    /* ── TOOL CARDS ── */
+    .tool-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: var(--transition);
+      transition-property: border-color, box-shadow, transform;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tool-card:hover {
+      border-color: var(--border-str);
+      transform: translateY(-4px);
+    }
+
+    .tool-card-generator:hover {
+      box-shadow:
+        0 12px 56px rgba(196, 146, 74, 0.1),
+        0 0 0 1px rgba(196, 146, 74, 0.18);
+    }
+
+    .tool-card-checker:hover {
+      box-shadow:
+        0 12px 56px rgba(93, 202, 165, 0.1),
+        0 0 0 1px rgba(93, 202, 165, 0.2);
+    }
+
+    .tool-card-header {
+      padding: 20px 28px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .tool-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+
+    .tool-badge {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 2px;
+    }
+
+    .badge-free {
+      background: rgba(93, 202, 165, 0.1);
+      color: var(--teal);
+      border: 1px solid rgba(93, 202, 165, 0.2);
+    }
+
+    /* Generator preview */
+    .tool-card-preview {
+      padding: 36px 28px 24px;
+      flex: 1;
+    }
+
+    .preview-name-display {
+      text-align: center;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+
+    .preview-characters {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(52px, 8vw, 72px);
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .preview-pinyin {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-style: italic;
+      color: var(--gold);
+      letter-spacing: 0.06em;
+    }
+
+    .preview-tags {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .preview-tag {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 2px;
+      background: rgba(196, 146, 74, 0.08);
+      color: var(--gold);
+      border: 1px solid rgba(196, 146, 74, 0.18);
+    }
+
+    .preview-meaning {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.7;
+      font-style: italic;
+      text-align: center;
+    }
+
+    /* Checker preview */
+    .preview-score-wrap {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+
+    .preview-score-ring {
+      position: relative;
+      width: 72px;
+      height: 72px;
+      flex-shrink: 0;
+    }
+
+    .preview-score-ring svg {
+      transform: rotate(-90deg);
+    }
+
+    .score-ring-bg {
+      fill: none;
+      stroke: rgba(127, 119, 221, 0.1);
+      stroke-width: 4.5;
+    }
+
+    .score-ring-fill {
+      fill: none;
+      stroke: var(--teal);
+      stroke-width: 4.5;
+      stroke-linecap: round;
+      stroke-dasharray: 175.9;
+      stroke-dashoffset: 10.6;
+    }
+
+    .score-number {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .preview-score-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .preview-score-name {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 30px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 6px;
+      letter-spacing: 0.06em;
+    }
+
+    .preview-score-pinyin {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      font-style: italic;
+      color: var(--text-mid);
+      margin-bottom: 10px;
+    }
+
+    .preview-auth-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 2px;
+      background: rgba(93, 202, 165, 0.1);
+      color: var(--teal);
+      border: 1px solid rgba(93, 202, 165, 0.22);
+    }
+
+    .preview-verdict {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.65;
+      font-style: italic;
+    }
+
+    /* Card footer/CTA */
+    .tool-card-cta {
+      padding: 20px 28px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .tool-cta-link {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+      transition-property: color, gap;
+    }
+
+    .tool-cta-link-generator { color: var(--gold-warm); }
+    .tool-cta-link-checker   { color: var(--teal); }
+
+    .tool-cta-link:hover { gap: 14px; }
+
+    .cta-char-deco {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 26px;
+      color: var(--text-light);
+      opacity: 0.35;
+      line-height: 1;
+    }
+
+    /* ── FEATURES SECTION ── */
+    .section-features {
+      padding: clamp(64px, 10vw, 100px) clamp(24px, 5vw, 72px);
+      max-width: 1240px;
+      margin: 0 auto;
+      border-top: 1px solid var(--border);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .feature-item {
+      padding: 32px 28px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: border-color var(--transition);
+    }
+
+    .feature-item:hover {
+      border-color: var(--border-str);
+    }
+
+    .feature-icon {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 36px;
+      color: var(--purple);
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .feature-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .feature-desc {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.75;
+    }
+
+    /* ── CTA BANNER ── */
+    .section-cta {
+      padding: clamp(60px, 10vw, 100px) clamp(24px, 5vw, 72px);
+    }
+
+    .cta-banner {
+      max-width: 1240px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border-str);
+      border-radius: 4px;
+      padding: clamp(52px, 8vw, 84px) clamp(32px, 6vw, 80px);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-banner::before {
+      content: '中';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(200px, 32vw, 440px);
+      color: var(--purple);
+      opacity: 0.04;
+      pointer-events: none;
+      user-select: none;
+      line-height: 1;
+    }
+
+    .cta-banner > * { position: relative; z-index: 1; }
+
+    .cta-banner h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(30px, 5vw, 52px);
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .cta-banner h2 em {
+      font-style: italic;
+      color: var(--purple);
+    }
+
+    .cta-banner p {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-mid);
+      max-width: 500px;
+      margin: 0 auto 40px;
+      line-height: 1.75;
+    }
+
+    .cta-buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      padding: 28px clamp(24px, 5vw, 72px);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text-light);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+
+    .footer-brand:hover { color: var(--text-mid); }
+
+    .footer-brand-mark { width: 24px; height: 24px; }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      font-size: 11px;
+      color: var(--text-light);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      transition: color 0.15s;
+    }
+
+    .footer-link:hover { color: var(--text-mid); }
+    .footer-link-tea { color: var(--gold); }
+    .footer-link-tea:hover { color: var(--gold-warm); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-logo    { animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .hero-eyebrow { animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both; }
+    .hero h1      { animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both; }
+    .hero-sub     { animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.28s both; }
+    .hero-ctas    { animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.38s both; }
+    .scroll-hint  { animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .features-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .tools-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .hero { padding-bottom: 100px; }
+      .tool-card-cta { flex-direction: column; align-items: flex-start; gap: 10px; }
+      footer { flex-direction: column; align-items: center; text-align: center; }
+      .scroll-hint { display: none; }
+    }
+
+    /* Utility */
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      overflow: hidden; clip: rect(0,0,0,0);
+    }
+  </style>
 </head>
 <body>
 
   <header>
-    <a href="/" class="logo">
-      <span class="logo-char">名</span>
-      <span class="logo-text">
-        Chinese Name Generator
-        <small class="logo-byline">by Sinosphere</small>
-      </span>
+    <a href="/" class="nav-brand" aria-label="Sinosphere — home">
+      <svg class="nav-logo-mark" viewBox="250 70 180 180" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g transform="translate(340, 160)">
+          <circle cx="0" cy="0" r="90" fill="none" stroke="#7F77DD" stroke-width="1.5"/>
+          <circle cx="0" cy="0" r="66" fill="none" stroke="#5DCAA5" stroke-width="0.8" stroke-dasharray="4 3"/>
+          <circle cx="0" cy="0" r="44" fill="none" stroke="#7F77DD" stroke-width="0.8" stroke-dasharray="2 4"/>
+          <circle cx="0" cy="-90" r="5.5" fill="#7F77DD"/>
+          <circle cx="90" cy="0" r="5.5" fill="#7F77DD"/>
+          <circle cx="0" cy="90" r="5.5" fill="#7F77DD"/>
+          <circle cx="-90" cy="0" r="5.5" fill="#7F77DD"/>
+          <circle cx="0" cy="-66" r="4.5" fill="#9FE1CB"/>
+          <circle cx="66" cy="0" r="4.5" fill="#9FE1CB"/>
+          <circle cx="0" cy="66" r="4.5" fill="#9FE1CB"/>
+          <circle cx="-66" cy="0" r="4.5" fill="#9FE1CB"/>
+          <circle cx="0" cy="0" r="28" fill="#3C3489" stroke="#7F77DD" stroke-width="1.5"/>
+          <text x="0" y="10" text-anchor="middle" font-size="22" font-weight="500" font-family="serif" fill="#AFA9EC">字</text>
+        </g>
+      </svg>
+      <span class="nav-wordmark">Sinosphere</span>
     </a>
-    <nav>
-      <a href="/" class="nav-link active">Generator</a>
-      <a href="/checker" class="nav-link nav-checker">Name Checker</a>
+    <nav aria-label="Main navigation">
+      <a href="/chinese-name-generator" class="nav-link">Name Generator</a>
+      <a href="/checker" class="nav-link nav-link-tool">Name Checker</a>
     </nav>
   </header>
 
   <main>
-    <!-- Hero -->
-    <section class="hero">
-      <div class="hero-eyebrow">Your name in Chinese</div>
-      <h1>Discover your<br><em>Chinese name</em></h1>
-      <p>Answer a few questions and receive a beautiful, authentic Chinese name — crafted with meaning, culture, and your identity in mind.</p>
+
+    <!-- ── HERO ── -->
+    <section class="hero" aria-labelledby="hero-heading">
+
+      <!-- Animated orbital logo -->
+      <svg
+        class="hero-logo"
+        viewBox="250 70 180 180"
+        xmlns="http://www.w3.org/2000/svg"
+        role="img"
+        aria-label="Sinosphere orbital logo mark"
+      >
+        <g transform="translate(340, 160)">
+
+          <!-- Outer ring + 8 dots — rotates clockwise 40s -->
+          <g>
+            <animateTransform
+              attributeName="transform"
+              type="rotate"
+              from="0 0 0"
+              to="360 0 0"
+              dur="40s"
+              repeatCount="indefinite"/>
+            <circle cx="0" cy="0" r="90" fill="none" stroke="#7F77DD" stroke-width="1.5"/>
+            <circle cx="0"     cy="-90"   r="6"   fill="#7F77DD"/>
+            <circle cx="63.64" cy="-63.64" r="4"  fill="#7F77DD" opacity="0.5"/>
+            <circle cx="90"    cy="0"     r="6"   fill="#7F77DD"/>
+            <circle cx="63.64" cy="63.64"  r="4"  fill="#7F77DD" opacity="0.5"/>
+            <circle cx="0"     cy="90"    r="6"   fill="#7F77DD"/>
+            <circle cx="-63.64" cy="63.64" r="4"  fill="#7F77DD" opacity="0.5"/>
+            <circle cx="-90"   cy="0"     r="6"   fill="#7F77DD"/>
+            <circle cx="-63.64" cy="-63.64" r="4" fill="#7F77DD" opacity="0.5"/>
+          </g>
+
+          <!-- Middle ring + 4 teal dots — rotates counter-clockwise 28s -->
+          <g>
+            <animateTransform
+              attributeName="transform"
+              type="rotate"
+              from="0 0 0"
+              to="-360 0 0"
+              dur="28s"
+              repeatCount="indefinite"/>
+            <circle cx="0" cy="0" r="66" fill="none" stroke="#5DCAA5" stroke-width="0.8" stroke-dasharray="4 3"/>
+            <circle cx="0"   cy="-66" r="5" fill="#9FE1CB"/>
+            <circle cx="66"  cy="0"   r="5" fill="#9FE1CB"/>
+            <circle cx="0"   cy="66"  r="5" fill="#9FE1CB"/>
+            <circle cx="-66" cy="0"   r="5" fill="#9FE1CB"/>
+          </g>
+
+          <!-- Inner dashed ring — rotates clockwise 20s -->
+          <g>
+            <animateTransform
+              attributeName="transform"
+              type="rotate"
+              from="0 0 0"
+              to="360 0 0"
+              dur="20s"
+              repeatCount="indefinite"/>
+            <circle cx="0" cy="0" r="44" fill="none" stroke="#7F77DD" stroke-width="0.8" stroke-dasharray="2 4" opacity="0.7"/>
+          </g>
+
+          <!-- Static center -->
+          <circle cx="0" cy="0" r="28" fill="#3C3489" stroke="#7F77DD" stroke-width="1.5"/>
+          <text x="0" y="10" text-anchor="middle" font-size="24" font-weight="500" font-family="serif" fill="#AFA9EC">字</text>
+
+        </g>
+      </svg>
+
+      <div class="hero-eyebrow" aria-hidden="true">Mandarin AI Tools</div>
+
+      <h1 id="hero-heading">Sinosphere</h1>
+
+      <p class="hero-sub">
+        AI-powered tools that bridge cultures — explore Chinese language,<br>
+        names, and identity with depth and authenticity.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="/chinese-name-generator" class="btn btn-primary">
+          Get Your Chinese Name
+          <svg class="btn-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M4 10h12M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="/checker" class="btn btn-outline">
+          Check a Name
+          <svg class="btn-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M4 10h12M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="scroll-hint" aria-hidden="true">
+        <span>Explore</span>
+        <div class="scroll-line"></div>
+      </div>
+
     </section>
 
-    <!-- Result -->
-    <div id="result-section">
-      <div class="result-card">
-        <div class="result-name-display" id="result-name-display" data-char="">
-          <div class="result-characters" id="result-characters"></div>
-          <div class="result-pinyin" id="result-pinyin"></div>
+    <!-- ── TOOLS SECTION ── -->
+    <section class="section-tools" aria-labelledby="tools-heading">
+
+      <div class="section-eyebrow" aria-hidden="true">The Suite</div>
+      <h2 class="section-heading" id="tools-heading">
+        Two tools. One <em>cultural bridge.</em>
+      </h2>
+
+      <div class="tools-grid">
+
+        <!-- Chinese Name Generator -->
+        <article class="tool-card tool-card-generator" aria-labelledby="gen-title">
+          <div class="tool-card-header">
+            <span class="tool-label" id="gen-title">Chinese Name Generator</span>
+            <span class="tool-badge badge-free">Free</span>
+          </div>
+
+          <div class="tool-card-preview">
+            <!-- Mock output preview -->
+            <div class="preview-name-display">
+              <div class="preview-characters" lang="zh" aria-label="Sample name: Lin Chenxi">林晨曦</div>
+              <div class="preview-pinyin" aria-label="Pinyin: Lín Chénxī">Lín Chénxī</div>
+              <div class="preview-tags">
+                <span class="preview-tag">Classical</span>
+                <span class="preview-tag">Female</span>
+                <span class="preview-tag">Simplified</span>
+              </div>
+            </div>
+            <p class="preview-meaning">
+              "Forest of morning light — graceful, serene, and deeply poetic.
+              A name carrying centuries of Chinese literary tradition."
+            </p>
+          </div>
+
+          <div class="tool-card-cta">
+            <a href="/chinese-name-generator" class="tool-cta-link tool-cta-link-generator">
+              Generate My Name
+              <svg style="width:15px;height:15px" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M4 10h12M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <span class="cta-char-deco" aria-hidden="true">名</span>
+          </div>
+        </article>
+
+        <!-- Chinese Name Checker -->
+        <article class="tool-card tool-card-checker" aria-labelledby="chk-title">
+          <div class="tool-card-header">
+            <span class="tool-label" id="chk-title">Chinese Name Checker</span>
+            <span class="tool-badge badge-free">Free</span>
+          </div>
+
+          <div class="tool-card-preview">
+            <!-- Mock score preview -->
+            <div class="preview-score-wrap">
+              <div class="preview-score-ring" aria-label="Authenticity score: 94 out of 100">
+                <svg width="72" height="72" viewBox="0 0 72 72" aria-hidden="true">
+                  <circle class="score-ring-bg" cx="36" cy="36" r="28"/>
+                  <circle class="score-ring-fill" cx="36" cy="36" r="28" transform="rotate(-90 36 36)"/>
+                </svg>
+                <div class="score-number">94</div>
+              </div>
+              <div class="preview-score-info">
+                <div class="preview-score-name" lang="zh" aria-label="Sample name: Wang Mingzhi">王明志</div>
+                <div class="preview-score-pinyin">Wáng Míngzhì</div>
+                <span class="preview-auth-badge">✓ Authentic</span>
+              </div>
+            </div>
+            <p class="preview-verdict">
+              "An excellent, naturally flowing name. The characters carry strong
+              cultural weight and read exactly as a native speaker would choose."
+            </p>
+          </div>
+
+          <div class="tool-card-cta">
+            <a href="/checker" class="tool-cta-link tool-cta-link-checker">
+              Check a Name
+              <svg style="width:15px;height:15px" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M4 10h12M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <span class="cta-char-deco" aria-hidden="true">査</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ── FEATURES SECTION ── -->
+    <section class="section-features" aria-labelledby="features-heading">
+
+      <div class="section-eyebrow" aria-hidden="true">Why Sinosphere</div>
+      <h2 class="section-heading" id="features-heading">
+        Built on <em>real expertise</em>
+      </h2>
+
+      <div class="features-grid">
+
+        <div class="feature-item">
+          <div class="feature-icon" aria-hidden="true">智</div>
+          <h3 class="feature-title">AI-Powered by Claude</h3>
+          <p class="feature-desc">
+            Powered by Anthropic's Claude — a world-class AI with deep knowledge
+            of Chinese linguistics, classical literature, tonal harmony, and
+            naming traditions stretching back thousands of years.
+          </p>
         </div>
 
-        <div class="result-body">
-
-          <div class="result-section">
-            <div class="result-section-label">Characters</div>
-            <div class="char-breakdown" id="char-breakdown"></div>
-          </div>
-
-          <div class="result-divider"></div>
-
-          <div class="result-section">
-            <div class="result-section-label">The Meaning</div>
-            <div class="result-section-content" id="result-meaning"></div>
-          </div>
-
-          <div class="result-section">
-            <div class="result-section-label">Why This Name</div>
-            <div class="result-section-content" id="result-why"></div>
-          </div>
-
-          <div class="result-section">
-            <div class="result-section-label">Cultural Note</div>
-            <div class="result-section-content" id="result-culture"></div>
-          </div>
-
-          <div class="result-section">
-            <div class="result-section-label">Pronunciation</div>
-            <div class="pronunciation-box" id="result-pronunciation"></div>
-          </div>
-
+        <div class="feature-item">
+          <div class="feature-icon" aria-hidden="true">文</div>
+          <h3 class="feature-title">Culturally Authentic</h3>
+          <p class="feature-desc">
+            Every name is crafted around real conventions — not transliterations
+            or random character combinations. We consider tonal flow, individual
+            character meaning, and how names read to a native speaker's ear.
+          </p>
         </div>
 
-        <div class="result-footer">
-          <button class="btn btn-outline" id="btn-restart">
-            ← Generate Another
-          </button>
-          <a href="/checker" class="btn btn-ghost">
-            Check a name →
+        <div class="feature-item">
+          <div class="feature-icon" aria-hidden="true">地</div>
+          <h3 class="feature-title">Regionally Precise</h3>
+          <p class="feature-desc">
+            Choose Mainland China (Simplified characters) or Taiwan (Traditional
+            characters) — with distinct regional naming conventions, cultural
+            contexts, and literary references for each tradition.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── CTA BANNER ── -->
+    <section class="section-cta" aria-labelledby="cta-heading">
+      <div class="cta-banner">
+        <h2 id="cta-heading">
+          Ready to find your <em>Chinese identity?</em>
+        </h2>
+        <p>
+          Whether you need a beautiful, authentic name crafted just for you —
+          or want to verify one you already have — Sinosphere gives you
+          the cultural depth to get it right.
+        </p>
+        <div class="cta-buttons">
+          <a href="/chinese-name-generator" class="btn btn-primary">
+            Generate My Chinese Name
+            <svg class="btn-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M4 10h12M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="/checker" class="btn btn-teal">
+            Check a Name
+            <svg class="btn-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M4 10h12M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </a>
         </div>
       </div>
-    </div><!-- /result-section -->
-
-    <!-- Quiz -->
-    <div class="quiz-wrapper" id="quiz-section">
-      <div class="quiz-card">
-        <div class="region-toggle" id="region-toggle">
-          <button class="region-btn active" data-value="mainland">
-            <span class="region-char">中</span> Mainland China
-          </button>
-          <button class="region-btn" data-value="taiwan">
-            <span class="region-char">臺</span> Taiwan
-          </button>
-        </div>
-        <div class="quiz-progress">
-          <div class="quiz-progress-fill" id="progress-fill"></div>
-        </div>
-
-        <div class="quiz-meta">
-          <div class="step-counter">
-            Step <span id="step-current">1</span> of <span id="step-total">4</span>
-          </div>
-        </div>
-
-        <div class="steps-container" id="steps-container">
-
-          <!-- Step 1: Name -->
-          <div class="step active" id="step-1">
-            <div class="step-question">What's your name?</div>
-            <div class="step-hint">We'll use this to craft something that feels personally yours.</div>
-            <div class="name-input-wrap">
-              <input
-                type="text"
-                class="name-input"
-                id="input-name"
-                placeholder="Your name…"
-                autocomplete="off"
-                maxlength="60"
-              >
-            </div>
-          </div>
-
-          <!-- Step 2: Gender -->
-          <div class="step" id="step-2">
-            <div class="step-question">Gender preference?</div>
-            <div class="step-hint">Chinese names often carry gendered qualities in their characters.</div>
-            <div class="options-grid cols-3" id="options-gender">
-              <div class="option-card" data-value="male">
-                <div class="option-icon">男</div>
-                <div class="option-label">Male</div>
-                <div class="option-sub">Strong, classic characters</div>
-              </div>
-              <div class="option-card" data-value="female">
-                <div class="option-icon">女</div>
-                <div class="option-label">Female</div>
-                <div class="option-sub">Elegant, graceful characters</div>
-              </div>
-              <div class="option-card" data-value="neutral">
-                <div class="option-icon">和</div>
-                <div class="option-label">Neutral</div>
-                <div class="option-sub">Balanced, universal feel</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Step 3: Sound -->
-          <div class="step" id="step-3">
-            <div class="step-question">How should it sound?</div>
-            <div class="step-hint">Should your Chinese name echo your original name, or stand on its own?</div>
-            <div class="options-grid cols-2" id="options-sound">
-              <div class="option-card" data-value="phonetic">
-                <div class="option-icon">声</div>
-                <div class="option-label">Phonetically Similar</div>
-                <div class="option-sub">Sounds like your original name when spoken</div>
-              </div>
-              <div class="option-card" data-value="independent">
-                <div class="option-icon">意</div>
-                <div class="option-label">Meaning-Led</div>
-                <div class="option-sub">Chosen purely for beauty and meaning</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Step 4: Style -->
-          <div class="step" id="step-4">
-            <div class="step-question">What style speaks to you?</div>
-            <div class="step-hint">The characters we choose carry centuries of history — or contemporary life.</div>
-            <div class="options-grid cols-2" id="options-style">
-              <div class="option-card" data-value="classical">
-                <div class="option-icon">詩</div>
-                <div class="option-label">Classical &amp; Poetic</div>
-                <div class="option-sub">Drawn from poetry, nature, and classical literature</div>
-              </div>
-              <div class="option-card" data-value="modern">
-                <div class="option-icon">新</div>
-                <div class="option-label">Modern &amp; Everyday</div>
-                <div class="option-sub">Contemporary, approachable, and natural-sounding</div>
-              </div>
-            </div>
-          </div>
-
-        </div><!-- /steps-container -->
-
-        <!-- Navigation -->
-        <div class="step-nav" id="step-nav">
-          <button class="btn btn-ghost" id="btn-back" style="visibility:hidden">
-            ← Back
-          </button>
-          <button class="btn btn-primary" id="btn-next" disabled>
-            Continue
-            <svg class="btn-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M4 10h12M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-        </div>
-
-        <!-- Loading -->
-        <div class="loading-state" id="loading-state">
-          <div class="loading-char">名</div>
-          <div class="loading-text">Crafting your name<span class="loading-dots"></span></div>
-        </div>
-
-      </div><!-- /quiz-card -->
-
-      <div class="error-box" id="error-box" role="alert"></div>
-    </div><!-- /quiz-wrapper -->
-
-    <!-- How it Works -->
-    <section class="how-it-works" aria-labelledby="hiw-heading-index">
-      <div class="how-it-works-eyebrow">The process</div>
-      <h2 id="hiw-heading-index">How the Chinese Name <em>Generator</em> works</h2>
-      <ol class="hiw-steps">
-        <li class="hiw-step">
-          <div class="hiw-icon" aria-hidden="true">问</div>
-          <span class="hiw-step-number">Step 1</span>
-          <h3>Share Your Story</h3>
-          <p>Answer 4 quick questions about your name, gender, preferred sound, and cultural style. Each answer shapes the AI's creative brief.</p>
-        </li>
-        <li class="hiw-step">
-          <div class="hiw-icon" aria-hidden="true">智</div>
-          <span class="hiw-step-number">Step 2</span>
-          <h3>AI Crafts Your Name</h3>
-          <p>Claude analyses Chinese naming traditions — tonal harmony, character meaning, and regional conventions — to create an authentic name tailored to you.</p>
-        </li>
-        <li class="hiw-step">
-          <div class="hiw-icon" aria-hidden="true">名</div>
-          <span class="hiw-step-number">Step 3</span>
-          <h3>Receive Your Name</h3>
-          <p>Get your Chinese name complete with pinyin pronunciation, individual character meanings, and cultural context explaining why it suits you.</p>
-        </li>
-      </ol>
     </section>
 
   </main>
 
   <footer>
-    <div class="footer-left"><span>名</span> — Sinosphere</div>
-    <div class="footer-right">
+    <a href="/" class="footer-brand" aria-label="Sinosphere home">
+      <svg class="footer-brand-mark" viewBox="250 70 180 180" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g transform="translate(340, 160)">
+          <circle cx="0" cy="0" r="90" fill="none" stroke="#7F77DD" stroke-width="2" opacity="0.45"/>
+          <circle cx="0" cy="0" r="66" fill="none" stroke="#5DCAA5" stroke-width="1" stroke-dasharray="4 3" opacity="0.45"/>
+          <circle cx="0" cy="-90" r="5" fill="#7F77DD" opacity="0.45"/>
+          <circle cx="90"  cy="0"  r="5" fill="#7F77DD" opacity="0.45"/>
+          <circle cx="0"   cy="90" r="5" fill="#7F77DD" opacity="0.45"/>
+          <circle cx="-90" cy="0"  r="5" fill="#7F77DD" opacity="0.45"/>
+          <circle cx="0" cy="0" r="28" fill="#3C3489" stroke="#7F77DD" stroke-width="1.5" opacity="0.6"/>
+          <text x="0" y="10" text-anchor="middle" font-size="20" font-weight="500" font-family="serif" fill="#AFA9EC" opacity="0.6">字</text>
+        </g>
+      </svg>
+      Sinosphere
+    </a>
+    <div class="footer-links">
       <a href="https://buymeacoffee.com/sinosphere" target="_blank" rel="noopener" class="footer-link footer-link-tea">☕ Buy me a tea</a>
       <a href="/imprint" class="footer-link">Imprint</a>
       <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
     </div>
   </footer>
 
-  <script src="/js/generator.js"></script>
 </body>
 </html>

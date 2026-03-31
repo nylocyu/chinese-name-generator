@@ -219,7 +219,13 @@ async function submitForm() {
 
         let parsed;
         try { parsed = JSON.parse(payload); } catch { continue; }
-        if (parsed.error) throw new Error(parsed.error);
+        if (parsed.error) {
+          const errMsg = typeof parsed.error === 'object'
+            ? (parsed.error.message || 'Unknown error')
+            : parsed.error;
+          const isOverloaded = typeof parsed.error === 'object' && parsed.error.type === 'overloaded_error';
+          throw new Error(isOverloaded ? 'The AI service is temporarily overloaded. Please try again in a moment.' : errMsg);
+        }
         if (parsed.text) accumulated += parsed.text;
       }
     }
@@ -234,7 +240,7 @@ async function submitForm() {
     document.querySelector('.quiz-meta').style.display = '';
     loadingState.classList.remove('visible');
     progressFill.style.width = '75%';
-    showError('Something went wrong: ' + err.message + '. Please check your API key and try again.');
+    showError(err.message || 'Something went wrong. Please try again.');
   }
 }
 
@@ -268,7 +274,7 @@ function displayResult(data) {
     parts.push({
       char,
       pinyin:  extractPinyinPart(data.pinyin, i + 1),
-      meaning: data.given_name_meaning || '',
+      meaning: (data.given_name_meanings && data.given_name_meanings[i]) || data.given_name_meaning || '',
       label:   givenChars.length > 1 ? `Given ${i + 1}` : 'Given Name',
     });
   });

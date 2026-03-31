@@ -237,7 +237,13 @@ async function runCheck(nameInput) {
 
         let parsed;
         try { parsed = JSON.parse(payload); } catch { continue; }
-        if (parsed.error) throw new Error(parsed.error);
+        if (parsed.error) {
+          const errMsg = typeof parsed.error === 'object'
+            ? (parsed.error.message || 'Unknown error')
+            : parsed.error;
+          const isOverloaded = typeof parsed.error === 'object' && parsed.error.type === 'overloaded_error';
+          throw new Error(isOverloaded ? 'The AI service is temporarily overloaded. Please try again in a moment.' : errMsg);
+        }
         if (parsed.text) {
           accumulated += parsed.text;
           if (!streamStarted) {
@@ -252,7 +258,7 @@ async function runCheck(nameInput) {
     if (!jsonMatch) throw new Error('Invalid response format');
     displayResult(JSON.parse(jsonMatch[0]));
   } catch (err) {
-    showError('Error: ' + err.message + '. Please check your API key and try again.');
+    showError(err.message || 'Something went wrong. Please try again.');
   } finally {
     if (loadingText) loadingText.innerHTML = 'Analysing<span class="loading-dots"></span>';
     setLoading(false);

@@ -81,7 +81,7 @@ Respond ONLY with valid JSON in this exact format (no markdown, no code blocks, 
   "full_name": "surname + given_name combined",
   "pinyin": "Full pinyin with tone marks (e.g., Lín Chénxī)",
   "surname_meaning": "one short sentence (max 8 words) on what this surname means",
-  "given_name_meaning": "one short sentence (max 10 words) per character — e.g. 'Lin means forest or grove.'",
+  "given_name_meanings": ["one short sentence (max 10 words) for the first given name character", "one short sentence (max 10 words) for the second given name character (omit this element if the given name is only 1 character)"],
   "overall_meaning": "the poetic overall meaning and feeling of the complete name in 1-2 sentences",
   "why_this_suits_you": "a personal, thoughtful 2-3 sentence explanation of why this name fits this person",
   "cultural_note": "an interesting cultural or literary context, reference, or tradition related to this name",
@@ -206,6 +206,10 @@ Respond ONLY with valid JSON, no markdown:
     res.write(`data: ${JSON.stringify({ error: error.message })}\n\n`);
     res.end();
   }
+});
+
+app.get('/chinese-name-generator', (_req, res) => {
+  res.sendFile(join(__dirname, 'public', 'name-generator.html'));
 });
 
 app.get('/checker', (_req, res) => {
