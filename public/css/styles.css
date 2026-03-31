@@ -1001,6 +1001,30 @@ footer {
   font-size: 11px;
   color: var(--text-light);
   letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-link {
+  font-size: 11px;
+  color: var(--text-light);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  transition: color 0.15s;
+}
+
+.footer-link:hover {
+  color: var(--text);
+}
+
+.footer-link-tea {
+  color: var(--gold);
+}
+
+.footer-link-tea:hover {
+  color: var(--text);
 }
 
 /* ── Responsive ─────────────────────────────────────────── */

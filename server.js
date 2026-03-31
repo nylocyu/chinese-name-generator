@@ -212,6 +212,14 @@ app.get('/checker', (_req, res) => {
   res.sendFile(join(__dirname, 'public', 'checker.html'));
 });
 
+app.get('/imprint', (_req, res) => {
+  res.sendFile(join(__dirname, 'public', 'imprint.html'));
+});
+
+app.get('/privacy-policy', (_req, res) => {
+  res.sendFile(join(__dirname, 'public', 'privacy-policy.html'));
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Chinese Name Generator running at http://localhost:${PORT}`);
