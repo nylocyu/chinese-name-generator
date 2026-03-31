@@ -31,8 +31,18 @@ app.post('/api/generate', async (req, res) => {
     return res.status(400).json({ success: false, error: 'Missing required fields' });
   }
 
-  if (name.trim().length > 60) {
-    return res.status(400).json({ success: false, error: 'Name must be 60 characters or fewer.' });
+  const trimmedName = name.trim();
+  if (trimmedName.length > 50) {
+    return res.status(400).json({ success: false, error: 'Name must be 50 characters or fewer.' });
+  }
+  if (/^\d+$/.test(trimmedName)) {
+    return res.status(400).json({ success: false, error: 'Please enter a real name, not just numbers.' });
+  }
+  if (!/[a-zA-Z\u00C0-\u024F]/.test(trimmedName)) {
+    return res.status(400).json({ success: false, error: 'Please enter a real name.' });
+  }
+  if (/(.)\1{4,}/.test(trimmedName)) {
+    return res.status(400).json({ success: false, error: 'Please enter a real name without excessive repeated characters.' });
   }
 
   const genderText =
@@ -79,7 +89,7 @@ Respond ONLY with valid JSON in this exact format (no markdown, no code blocks, 
   "surname": "single Chinese surname character (use the correct script for the region)",
   "given_name": "1-2 Chinese given name characters (use the correct script for the region)",
   "full_name": "surname + given_name combined",
-  "pinyin": "Full pinyin with tone marks (e.g., Lín Chénxī)",
+  "pinyin": "Full pinyin with tone marks — one syllable per character, separated by spaces (e.g., Lín Chén Xī)",
   "surname_meaning": "one short sentence (max 8 words) on what this surname means",
   "given_name_meanings": ["one short sentence (max 10 words) for the first given name character", "one short sentence (max 10 words) for the second given name character (omit this element if the given name is only 1 character)"],
   "overall_meaning": "the poetic overall meaning and feeling of the complete name in 1-2 sentences",
@@ -127,6 +137,9 @@ app.post('/api/check', async (req, res) => {
 
   if (!/^[\u4E00-\u9FFF\u3400-\u4DBF\uF900-\uFAFF\u2CEB0-\u2EBEF]+$/.test(name.trim())) {
     return res.status(400).json({ success: false, error: 'Please enter Chinese characters only.' });
+  }
+  if (/(.)\1{3,}/.test(name.trim())) {
+    return res.status(400).json({ success: false, error: 'Please enter a real Chinese name without excessive repeated characters.' });
   }
 
   const regionContext =

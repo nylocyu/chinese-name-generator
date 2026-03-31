@@ -37,6 +37,16 @@ const resultCulture     = document.getElementById('result-culture');
 const resultPronun      = document.getElementById('result-pronunciation');
 const btnRestart        = document.getElementById('btn-restart');
 
+// ── Input validation ─────────────────────────────────────
+function validateName(name) {
+  const t = name.trim();
+  if (t.length > 50)                      return 'Name must be 50 characters or fewer.';
+  if (/^\d+$/.test(t))                    return 'Please enter a real name, not just numbers.';
+  if (!/[a-zA-Z\u00C0-\u024F]/.test(t))  return 'Please enter a real name.';
+  if (/(.)\1{4,}/.test(t))               return 'Please enter a real name without excessive repeated characters.';
+  return null;
+}
+
 // ── Helpers ──────────────────────────────────────────────
 function updateProgress() {
   const pct = ((state.currentStep - 1) / state.totalSteps) * 100;
@@ -154,6 +164,10 @@ document.getElementById('input-name').addEventListener('keydown', e => {
 // ── Navigation ───────────────────────────────────────────
 btnNext.addEventListener('click', () => {
   clearError();
+  if (state.currentStep === 1) {
+    const err = validateName(state.answers.name);
+    if (err) { showError(err); return; }
+  }
   if (state.currentStep < state.totalSteps) {
     goToStep(state.currentStep + 1);
   } else {

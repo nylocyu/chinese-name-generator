@@ -292,6 +292,10 @@ form.addEventListener('submit', e => {
   e.preventDefault();
   const val = input.value.trim();
   if (!val) return;
+  if (/(.)\1{3,}/.test(val)) {
+    showError('Please enter a real Chinese name without excessive repeated characters.');
+    return;
+  }
   runCheck(val);
 });
 
