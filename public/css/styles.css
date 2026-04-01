@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&family=Noto+Serif+SC:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;700&display=swap');
 
 /* ── Variables ─────────────────────────────────────────── */
 :root {
@@ -30,7 +30,7 @@
 html { font-size: 16px; scroll-behavior: smooth; }
 
 body {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   background-color: var(--bg);
   color: var(--text);
   min-height: 100vh;
@@ -122,7 +122,7 @@ header {
 
 .logo-text small {
   display: block;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 10px;
   font-weight: 400;
   letter-spacing: 0.12em;
@@ -214,7 +214,7 @@ main {
 .hero h1 {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(40px, 7vw, 72px);
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.1;
   letter-spacing: -0.01em;
   color: var(--text);
@@ -228,7 +228,7 @@ main {
 
 .hero p {
   font-size: 15px;
-  font-weight: 300;
+  font-weight: 400;
   color: var(--text-mid);
   line-height: 1.7;
   max-width: 480px;
@@ -265,7 +265,7 @@ main {
   justify-content: center;
   gap: 7px;
   padding: 9px 14px;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.05em;
@@ -379,7 +379,7 @@ main {
 .step-question {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(26px, 4vw, 34px);
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.2;
   margin-bottom: 8px;
   color: var(--text);
@@ -389,7 +389,7 @@ main {
   font-size: 13px;
   color: var(--text-light);
   margin-bottom: 28px;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 /* Text input */
@@ -490,7 +490,7 @@ main {
 
 .option-sub {
   font-size: 11px;
-  font-weight: 300;
+  font-weight: 400;
   color: var(--text-light);
   line-height: 1.4;
 }
@@ -508,7 +508,7 @@ main {
   align-items: center;
   gap: 8px;
   padding: 12px 28px;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.06em;
@@ -705,7 +705,7 @@ main {
 .result-pinyin {
   font-family: 'Cormorant Garamond', serif;
   font-size: 22px;
-  font-weight: 400;
+  font-weight: 500;
   font-style: italic;
   color: var(--gold);
   letter-spacing: 0.06em;
@@ -739,7 +739,7 @@ main {
 
 .result-section-content {
   font-size: 15px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.7;
   color: var(--text-mid);
 }
@@ -793,7 +793,7 @@ main {
 .char-pill-meaning {
   font-size: 11px;
   color: var(--text-mid);
-  font-weight: 300;
+  font-weight: 400;
 }
 
 /* Divider */
@@ -811,7 +811,7 @@ main {
   padding: 14px 18px;
   font-size: 14px;
   color: var(--text-mid);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.5;
 }
 
@@ -878,29 +878,29 @@ main {
 
 .checker-input {
   flex: 1;
-  padding: 16px 20px;
+  padding: 16px 0;
   font-family: 'Noto Serif SC', serif;
   font-size: 28px;
   font-weight: 400;
   color: var(--text);
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--border);
   outline: none;
   transition: border-color var(--transition);
   letter-spacing: 0.1em;
+  line-height: 1.2;
 }
 
 .checker-input:focus {
-  border-color: var(--accent);
-  background: var(--bg-card);
+  border-bottom-color: var(--accent);
 }
 
 .checker-input::placeholder {
   font-size: 18px;
   color: var(--text-light);
   font-style: italic;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   letter-spacing: 0;
   opacity: 0.5;
 }
@@ -966,7 +966,7 @@ main {
 .score-verdict {
   font-family: 'Cormorant Garamond', serif;
   font-size: 20px;
-  font-weight: 400;
+  font-weight: 500;
   color: var(--text);
   margin-bottom: 4px;
 }
@@ -1070,17 +1070,95 @@ footer {
   color: var(--gold-warm);
 }
 
+/* ── Touch UX improvements ──────────────────────────────── */
+.btn,
+.nav-link,
+.region-btn,
+.option-card {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Ensure minimum tap target size */
+.nav-link {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
 /* ── Responsive ─────────────────────────────────────────── */
 @media (max-width: 600px) {
-  .step { padding: 24px 24px 28px; }
-  .step-nav { padding: 0 24px 24px; }
-  .quiz-meta { padding: 16px 24px 0; }
-  .result-name-display { padding: 36px 24px 28px; }
-  .result-body { padding: 28px 24px; }
-  .result-footer { padding: 20px 24px; }
-  .checker-card { padding: 28px 24px; }
+  /* Header — compact, hide logo wordmark to free space for nav */
+  header {
+    padding: 0 16px;
+    height: 60px;
+  }
+
+  main { padding-top: 60px; }
+
+  .logo-text { display: none; }
+
+  nav { gap: 3px; }
+
+  .nav-link {
+    padding: 8px 10px;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+  }
+
+  /* Quiz/generator */
+  .step { padding: 24px 20px 28px; }
+  .step-nav { padding: 0 20px 24px; }
+  .quiz-meta { padding: 16px 20px 0; }
+  .steps-container { min-height: auto; }
+
+  /* Results */
+  .result-name-display { padding: 32px 20px 24px; }
+  .result-body { padding: 24px 20px; }
+  .result-footer {
+    padding: 16px 20px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .result-footer .btn { width: 100%; justify-content: center; }
+
+  /* Checker */
+  .checker-card { padding: 24px 20px; }
   .checker-input-row { flex-direction: column; align-items: stretch; }
+  .checker-input { font-size: 24px; padding: 14px 0; }
+  .score-ring-wrap { gap: 16px; }
+
+  /* Footer */
   footer { flex-direction: column; align-items: center; text-align: center; }
+}
+
+@media (max-width: 420px) {
+  nav { gap: 2px; }
+  .nav-link { padding: 6px 8px; font-size: 10px; letter-spacing: 0.04em; }
+  .region-btn { padding: 8px 10px; font-size: 11px; gap: 5px; }
+  .region-btn .region-char { font-size: 13px; }
+  .step-question { font-size: clamp(22px, 6vw, 30px); }
+}
+
+/* iOS safe area support */
+@supports (padding: max(0px)) {
+  header {
+    padding-left: max(env(safe-area-inset-left), 16px);
+    padding-right: max(env(safe-area-inset-right), 16px);
+  }
+  footer {
+    padding-bottom: max(env(safe-area-inset-bottom), 28px);
+  }
+}
+
+@media (min-width: 601px) {
+  @supports (padding: max(0px)) {
+    header {
+      padding-left: max(env(safe-area-inset-left), clamp(24px, 5vw, 80px));
+      padding-right: max(env(safe-area-inset-right), clamp(24px, 5vw, 80px));
+    }
+  }
 }
 
 /* ── Utility ────────────────────────────────────────────── */
@@ -1119,7 +1197,7 @@ footer {
 .how-it-works > h2 {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(24px, 4vw, 36px);
-  font-weight: 400;
+  font-weight: 500;
   color: var(--text);
   margin-bottom: 40px;
   letter-spacing: -0.01em;
@@ -1185,7 +1263,7 @@ footer {
 
 .hiw-step > p {
   font-size: 13px;
-  font-weight: 300;
+  font-weight: 400;
   color: var(--text-mid);
   line-height: 1.65;
   margin: 0;

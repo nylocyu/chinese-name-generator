@@ -156,6 +156,10 @@
       color: var(--gold);
       margin: 2px 0 4px;
     }
+
+    @media (max-width: 480px) {
+      .score-breakdown-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -334,7 +338,7 @@
               </svg>
             </button>
           </div>
-          <div style="margin-top:10px; font-size:12px; color:var(--text-light); font-weight:300;">
+          <div style="margin-top:10px; font-size:12px; color:var(--text-light); font-weight:400;">
             Tip: Enter the name in Chinese characters — e.g. 王明, 林晨曦, 陈若云
           </div>
         </form>
