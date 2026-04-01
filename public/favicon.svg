@@ -1,35 +1,37 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="240 60 200 200" width="32" height="32">
   <!-- Background -->
-  <rect width="32" height="32" rx="6" fill="#0D0B27"/>
+  <rect x="240" y="60" width="200" height="200" rx="24" fill="#0D0B27"/>
 
-  <!-- Outer orbit ring -->
-  <circle cx="16" cy="16" r="12" fill="none" stroke="#7F77DD" stroke-width="0.9"/>
+  <g transform="translate(340, 160)" fill="none">
+    <!-- Outer orbit ring -->
+    <circle cx="0" cy="0" r="90" stroke="#7F77DD" stroke-width="1.5"/>
 
-  <!-- 8 dots on outer orbit -->
-  <circle cx="16"   cy="4"    r="1.4" fill="#7F77DD"/>
-  <circle cx="24.5" cy="7.5"  r="0.9" fill="#7F77DD" opacity="0.5"/>
-  <circle cx="28"   cy="16"   r="1.4" fill="#7F77DD"/>
-  <circle cx="24.5" cy="24.5" r="0.9" fill="#7F77DD" opacity="0.5"/>
-  <circle cx="16"   cy="28"   r="1.4" fill="#7F77DD"/>
-  <circle cx="7.5"  cy="24.5" r="0.9" fill="#7F77DD" opacity="0.5"/>
-  <circle cx="4"    cy="16"   r="1.4" fill="#7F77DD"/>
-  <circle cx="7.5"  cy="7.5"  r="0.9" fill="#7F77DD" opacity="0.5"/>
+    <!-- 8 dots on outer orbit -->
+    <circle cx="0"   cy="-90" r="6"  fill="#7F77DD"/>
+    <circle cx="64"  cy="-64" r="4"  fill="#7F77DD" opacity="0.5"/>
+    <circle cx="90"  cy="0"   r="6"  fill="#7F77DD"/>
+    <circle cx="64"  cy="64"  r="4"  fill="#7F77DD" opacity="0.5"/>
+    <circle cx="0"   cy="90"  r="6"  fill="#7F77DD"/>
+    <circle cx="-64" cy="64"  r="4"  fill="#7F77DD" opacity="0.5"/>
+    <circle cx="-90" cy="0"   r="6"  fill="#7F77DD"/>
+    <circle cx="-64" cy="-64" r="4"  fill="#7F77DD" opacity="0.5"/>
 
-  <!-- Middle teal orbit ring -->
-  <circle cx="16" cy="16" r="8.8" fill="none" stroke="#5DCAA5" stroke-width="0.6" stroke-dasharray="2.5 2"/>
+    <!-- Middle teal orbit ring -->
+    <circle cx="0" cy="0" r="66" stroke="#5DCAA5" stroke-width="0.8" stroke-dasharray="4 3"/>
 
-  <!-- 4 teal dots on middle orbit -->
-  <circle cx="16"   cy="7.2"  r="1.1" fill="#9FE1CB"/>
-  <circle cx="24.8" cy="16"   r="1.1" fill="#9FE1CB"/>
-  <circle cx="16"   cy="24.8" r="1.1" fill="#9FE1CB"/>
-  <circle cx="7.2"  cy="16"   r="1.1" fill="#9FE1CB"/>
+    <!-- 4 teal dots on middle orbit -->
+    <circle cx="0"   cy="-66" r="5" fill="#9FE1CB"/>
+    <circle cx="66"  cy="0"   r="5" fill="#9FE1CB"/>
+    <circle cx="0"   cy="66"  r="5" fill="#9FE1CB"/>
+    <circle cx="-66" cy="0"   r="5" fill="#9FE1CB"/>
 
-  <!-- Inner dashed ring -->
-  <circle cx="16" cy="16" r="5.8" fill="none" stroke="#7F77DD" stroke-width="0.5" stroke-dasharray="1.5 2.5" opacity="0.7"/>
+    <!-- Inner dashed ring -->
+    <circle cx="0" cy="0" r="44" stroke="#7F77DD" stroke-width="0.8" stroke-dasharray="2 4"/>
 
-  <!-- Center circle -->
-  <circle cx="16" cy="16" r="3.8" fill="#3C3489" stroke="#7F77DD" stroke-width="0.8"/>
+    <!-- Center circle -->
+    <circle cx="0" cy="0" r="28" fill="#3C3489" stroke="#7F77DD" stroke-width="1.5"/>
 
-  <!-- 字 character -->
-  <text x="16" y="19" text-anchor="middle" font-family="serif" font-size="5.5" font-weight="500" fill="#AFA9EC">字</text>
+    <!-- 字 character -->
+    <text x="0" y="10" text-anchor="middle" font-family="serif" font-size="24" font-weight="500" fill="#AFA9EC" stroke="none">字</text>
+  </g>
 </svg>
